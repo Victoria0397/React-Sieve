@@ -1,26 +1,24 @@
-import React from 'react';
+import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Prime from './Prime/Prime';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  sendToServer(){
+    fetch('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5')
+      .then(function(response) {
+        console.log(response);
+      });
+  }
+  render(){
+    
+    return (
+      <div className="App">
+        <Prime onSendToServer={this.sendToServer.bind(this)}/>
+      </div>
+    );
+  }
+
 }
 
 export default App;
